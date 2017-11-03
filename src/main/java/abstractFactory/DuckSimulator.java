@@ -8,23 +8,32 @@ import decorator.QuackCounter;
 public class DuckSimulator {
     public static void main(String[] args) {
         DuckSimulator simulator = new DuckSimulator();
-        AbstractDuckFactory duckFactory = new CountingDuckFactory();
+        System.out.println("---DuckFactory---");
+        AbstractDuckFactory duckFactory = new DuckFactory();
         simulator.simulate(duckFactory);
-    }
-    void simulate(AbstractDuckFactory duckFactory) {
-        Quackable mallardDuck = duckFactory.createMallardDuck();
-        Quackable redheadDuck = duckFactory.createRedheadDuck();
-        Quackable duckCall = duckFactory.createDuckCall();
-        Quackable rubberDuck = duckFactory.createRubberDuck();
 
-        System.out.println("\nDuck Simulator: With Abstract Factory");
+        System.out.println("---CountingDuckFactory---");
+        AbstractDuckFactory  countingFactory= new CountingDuckFactory();
+        simulator.simulate(countingFactory);
+
+        System.out.println("---CountingEchoDuckFactory---");
+        AbstractDuckFactory  countingEchoFactory= new CountingEchoDuckFactory();
+        simulator.simulate(countingEchoFactory);
+    }
+    void simulate(AbstractDuckFactory duck) {
+        Quackable mallardDuck = duck.createMallardDuck();
+        Quackable redheadDuck = duck.createRedheadDuck();
+        Quackable duckCall = duck.createDuckCall();
+        Quackable rubberDuck = duck.createRubberDuck();
+
+        System.out.println("Duck Simulator: With Abstract Factory");
         simulate(mallardDuck);
         simulate(redheadDuck);
         simulate(duckCall);
         simulate(rubberDuck);
         System.out.println("The ducks quacked " +
                 QuackCounter.getQuacks() +
- "times");
+ " times\n");
     }
     void simulate(Quackable duck) {
         duck.quack();
