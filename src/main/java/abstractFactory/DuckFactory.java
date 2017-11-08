@@ -2,7 +2,6 @@ package abstractFactory;
 
 import adapter.*;
 
-
 public class DuckFactory extends AbstractDuckFactory {
     public Quackable createMallardDuck() {
         return new MallardDuck();
